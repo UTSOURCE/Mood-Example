@@ -40,7 +40,7 @@ jobs:
 
   integration-test-android:
     needs: [code-analysis]
-    name: 'Integration Test :: ubuntu-latest :: Android'
+    name: 'Integration Test :: ubuntu-latest :: Android (API ${{ matrix.api-level }})'
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -67,12 +67,11 @@ jobs:
       - name: Launch the emulator
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          target: 'default'
           api-level: ${{ matrix.api-level }}
+          target: 'default'
           arch: 'x86_64'
           emulator-port: 5554
           script: |
-            ./gradlew connectedCheck
             flutter devices
             adb devices -l
       - name: Run Integration Test
