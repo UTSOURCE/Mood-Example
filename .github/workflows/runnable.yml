@@ -75,10 +75,7 @@ jobs:
           script: |
             flutter devices
             adb devices -l
-            flutter test integration_test/app_test.dart \
-            --dart-define=test_mode=true \
-            -d emulator-5554 \
-            -r github
+            flutter test integration_test/app_test.dart --dart-define=test_mode=true -r github
 
   test-build-ios:
     needs: [integration-test-android]
