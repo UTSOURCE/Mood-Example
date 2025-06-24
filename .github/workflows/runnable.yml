@@ -71,12 +71,13 @@ jobs:
           target: 'default'
           arch: 'x86_64'
           emulator-port: 5554
+          avd-name: 'avd-test'
           script: |
             flutter devices
             adb devices -l
       - name: Run Integration Test
         run: |
-          flutter emulators --launch emulator-5554
+          flutter emulators --launch avd-test
           flutter test integration_test/app_test.dart \
             --dart-define=test_mode=true \
             -d emulator-5554 \
